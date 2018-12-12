@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Radio Żyrek</title>
-        <link rel="stylesheet" href="stajl.css">
+        <link rel="stylesheet" href="./css/stajl.css">
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
     </head>
