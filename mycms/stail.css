@@ -1,0 +1,400 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+  text-decoration: none;
+  color: #fff;
+}
+/* Czcionki */
+
+@font-face {
+	font-family: Intro;
+	src: url(Intro.otf);
+}
+@font-face {
+	font-family: Intro_Inline;
+	src: url(Intro_Inline.otf);
+}
+@font-face {
+	font-family: AutourReg;
+	src: url(AutourOne-Regular.otf);
+}
+/* Globalne style */
+::-webkit-scrollbar {
+	    -webkit-appearance: none;
+	    width: 11px;
+	}
+	::-webkit-scrollbar-thumb {
+	    border-radius: 4px;
+	    background-color: rgba(0,0,40,.5);
+	    box-shadow: 0 0 5px rgba(255,255,255,.5);
+	}
+body{
+  background-color: #024;
+  font-family: AutourReg, sans-serif;
+  color: #fff;
+}
+h1{
+  font-size: 55px;
+  font-weight: bold;
+  font-family: AutourReg, sans-serif;
+  color: #800000;
+  text-shadow: -3px 0 0 #000000, 3px 3px 0 #000000,
+          6px -3px 0 #000000, 9px 0 0 #000000;
+  text-align: center;
+
+}
+h2,caption{
+		font-family: AutourReg;
+		font-weight: bold;
+		font-size: 2em;
+		text-align: center;
+		color: #fff;
+}
+h3{
+	font-family: AutourReg;
+	font-weight: bold;
+	font-size: 1em;
+	text-align: center;
+	color: #fff;
+}
+.big-button{
+	display: inline-block;
+	border: #fff solid 5px;
+	border-radius: 200px;
+	width: 300px;
+	background-color: #000;
+}
+.col-one-third{
+	width: 33.3%;
+	float: left;
+}
+.col-half{
+	width: 50%;
+	float: left;
+}
+.clear{
+	clear: both;
+}
+/* Kontener */
+.container{
+    max-width: 1160px;
+    margin: 0 auto;
+}
+/* Nagłowek panelu administratora - CMSa */
+.top{
+  background-color: #2F4F4F;
+  width: 100%;
+  height: 100px;
+
+}
+.logo{
+  float: left;
+  color: #A62A2A;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 15px 50px;
+  font-family: Intro_Inline;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 60px;
+  text-shadow: color: #FFFFFF;
+ text-shadow: -1px 0 0 #000000, 1px 1px 0 #000000,
+         2px -1px 0 #000000, 3px 0 0 #000000;
+}
+.cms-block{
+  float: left;
+  margin: 0px 10px;
+  border: solid 3px #c3c3c3;
+  display: block;
+  width: 140px;
+  height: 50px;
+  color: #fff;
+  text-align: center;
+  padding-top: 20px;
+  border: #6B238E solid 5px;
+  border-radius: 100px;
+  background-color: #2A00FC;
+}
+.cms-block:hover{
+  background-color: #1A00EB;
+}
+.cms-under-block{
+	border: #6B238E solid 5px;
+  border-radius: 100px;
+  background-color: #2A00FC;
+  display: block;
+  width: 140px;
+  height: 50px;
+	color: #fff;
+  text-align: center;
+	padding-top: 20px;
+	margin-left: 10px;
+
+}
+.cms-under-block:hover{
+	background-color: red;
+}
+.cms-top{
+  float: right;
+  margin-top: 12px;
+  margin-right: 30px;
+}
+#flip, #flip1, #flip2, #flip3{
+  position: relative;
+}
+#panel, #panel1, #panel2, #panel3 {
+    float: none;
+    display: none;
+    position: absolute;
+    margin-top: 75px;
+
+}
+#panel1{
+  margin-left: 170px;
+}
+#panel2{
+  margin-left: 340px;
+}
+#panel3{
+  margin-left: 510px;
+}
+
+/* Strona głowna CMSa */
+.email{
+  text-align: center;
+  display: block;
+  color: #003333;
+}
+/* Banner */
+.banner{
+	margin-top: 30px;
+	/*background: url("img/Diamond.jpg");*/
+	background-position: bottom;
+	background-size: cover;
+	width: 100%;
+	height: 710px;
+}
+.banner h1{
+	padding: 200px 0;
+}
+
+/* Bieżące notowanie */
+.notowanie{
+	text-align: center;
+	border: solid #abc 2px;
+	padding: 100px;
+	font-family: AutourReg;
+	color: #fff;
+}
+
+/* 3 najnowsze... */
+.latest-news{
+	width: 100%;
+	height: 900px;
+}
+.latest-news h1{
+	padding-bottom: 50px;
+}
+/* Podstrony */
+.add-news, .add-comment, .add-photo{
+	padding: 0 30%;
+	padding-bottom: 50px;
+	color: #fff;
+	text-align: center;
+	font-family: AutourReg, sans-serif;
+}
+.add-news input:focus, .add-news textarea:focus, .add-news select:focus{
+	background-color: #79FF20;
+}
+.add-news select, input, textarea{
+	background-color: #FFFF08;
+	border-radius: 40px;
+	font-weight: bold;
+	font-family: AutourReg, sans-serif;
+	padding: 3px 25px;
+}
+.delete-news{
+	margin: 10px 40%;
+}
+.delete-news select, .delete-news input{
+	background-color: #FF181D;
+	border-style:groove;
+	height: 40px;
+	margin-bottom: 15px;
+	font-family: AutourReg, sans-serif;
+	font-weight: bold;
+}
+.delete-news select{
+	width: 450px;
+	overflow: scroll;
+}
+.add-event{
+	color: #fff;
+	font-family: AutourReg, sans-serif;
+	background-color: #442F63;
+	padding: 0 40%;
+}
+.add-event input:focus, .add-event select:focus, .add-event select, .add-event textarea{
+	background-color: #331E52;
+	border-color: #fff;
+	color: #fff;
+	font-family: AutourReg, sans-serif;
+}
+.add-event select{
+	padding: 30px 30%;
+}
+.event-input{
+	width: 400px;
+	height: 50px;
+}
+.add-photo input{
+	background-color: #0D00B7;
+	height: 50px;
+	width: 100%;
+	border: solid #000;
+	font-family: AutourReg, sans-serif;
+	text-align: center;
+	color: #fff;
+}
+.add-photo select{
+	background-color: #0D00B7;
+	height: 50px;
+	border: solid #000;
+	font-family: AutourReg, sans-serif;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 15px;
+}
+/* Aktualnosci - index.php */
+.title {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border: 1em solid #fff;
+    background: #111;
+    max-width: 100%;
+		margin-bottom: 100px;
+}
+
+.title img {
+    display: block;
+    transition: all .6s ease-in-out;
+		width: 350px;
+		height: 300px;
+}
+
+.title:before, .title:after {
+    content: '';
+    position: absolute;
+    text-align: center;
+    transition: all .6s ease-in-out;
+    width: 100%;
+}
+
+.title:before {
+    height: 100%;
+}
+
+.title:after {
+    background: rgba(24, 188, 156,.9);
+    color: #fff;
+    content: attr(data-title);
+    line-height: 1.5em;
+ overflow: hidden;
+ padding: 1em .5em;
+ text-overflow: ellipsis;
+ white-space: pre;
+ font-family: AutourReg, sans-serif;
+ font-size: 13px;
+}
+.title.uncover {
+ background: rgba(24, 188, 156);
+ z-index: 0;
+}
+
+.title.uncover:after {
+ bottom: 0;
+ z-index: -1;
+}
+
+.title.uncover img {
+ z-index: 1;
+}
+
+.title.uncover:hover img {
+ -webkit-transform: translateY(-3.4em);
+ -moz-transform: translateY(-3.4em);
+ transform: translateY(-3.4em);
+}
+
+.title.uncover.overlay:before {
+ top: 0;
+ left: 0;
+ height: auto;
+ background: rgba(24, 188, 156, .5);
+ z-index: 2;
+ bottom: 0;
+ top: 100%;
+}
+
+.title.uncover.overlay:hover:before {
+ bottom: 3.4em;
+ top: 0;
+}
+/* Stopka */
+.site-footer{
+		background: #2F2F2F;
+		color: #FFFFFF;
+		padding: 12px 0;
+}
+.site-footer p{
+		text-align: center;
+
+}
