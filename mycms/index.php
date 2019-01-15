@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once("naglowekcms.php");
 require_once("connect.php");
+unset($_SESSION['blad']);
 $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 if (!isset($_SESSION['zalogowany']))
 {
@@ -37,10 +37,11 @@ if (!isset($_SESSION['zalogowany']))
      }
    }
    if($current_id_newsa!=$current_id){
-     $aktual_image = '<img src="img/logo.jpeg" alt="Fotka probna" /></a>';
+     $aktual_image = '<img src="./img/logo.jpg" alt="Fotka probna" /></a>';
    }
    echo '<a href="news.php?id='.$rekord[0].'" data-title="'.$rekord[1].'" class="title uncover">'.$aktual_image.'</a>';
    }
+   
    $sql = "SELECT * from newsy order by id desc limit 1,1"; // 2
    $query = @$polaczenie->query($sql);
    echo'</div><div class="col-one-third">';
@@ -61,7 +62,7 @@ if (!isset($_SESSION['zalogowany']))
        }
      }
      if($current_id_newsa!=$current_id){
-       $aktual_image = '<img src="img/logo.jpeg" alt="Fotka probna" /></a>';
+       $aktual_image = '<img src="../img/logo.jpg" alt="Fotka probna" /></a>';
      }
      echo '<a href="news.php?id='.$rekord[0].'" data-title="'.$rekord[1].'" class="title uncover">'.$aktual_image.'</a>';
      }
@@ -85,7 +86,7 @@ if (!isset($_SESSION['zalogowany']))
        }
      }
      if($current_id_newsa!=$current_id){
-       $aktual_image = '<img src="img/logo.jpeg" alt="Fotka probna" /></a>';
+       $aktual_image = '<img src="../img/logo.jpg" alt="Fotka probna" /></a>';
      }
      echo '<a href="news.php?id='.$rekord[0].'" data-title="'.$rekord[1].'" class="title uncover">'.$aktual_image.'</a>';
      }

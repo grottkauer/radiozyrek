@@ -7,6 +7,7 @@ if (!isset($_SESSION['zalogowany']))
 {
   header("Location: ../index.php");
 }
+$_SESSION['add-utwor'] = true;
  ?>
 
  <?php
@@ -26,19 +27,38 @@ if (!isset($_SESSION['zalogowany']))
    </form>
 
  </div><br><br> <div id="container"></div>';
+ if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
+ $blad = false;
  if($_SERVER['REQUEST_METHOD'] == 'POST')
  {
    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
    $title = $polaczenie->real_escape_string($_POST['tytul']);
-   //echo $city;
+   $author = $polaczenie->real_escape_string($_POST['wykonawca']);
+   //echo $title;
 
-   $sql = "INSERT INTO utwory values('','".$_POST['data']."','".$title."','".$polaczenie->real_escape_string($_POST['wykonawca'])."','".$_POST['obecnie']."')";
-   if ($query = $polaczenie->query($sql)) {
-     header("Location: index.php");
+   // SPRAWDZANIE TYTULU I WYKONAWCY W BAZIE
+   $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+   $sql1 = "SELECT * from utwory";
+   $query = $polaczenie->query($sql1);
+   while($rekord = mysqli_fetch_array($query))
+   {
+     if (($rekord[2] == $title) && ($rekord[3] == $author)) {
+       $_SESSION['blad'] = '<span style="color:red">Dla tego wykonawcy jest już przypisany utwór</span>';
+       header('Location: add-plan.php');
+     }
    }
-   else {
-     echo '<h2>Coś zostało podane źle i utwór nie został dodany</h2>';
+
+   if(!isset($_SESSION['blad'])){
+     $sql = "INSERT INTO utwory values('','".$_POST['data']."','".$title."','".$polaczenie->real_escape_string($_POST['wykonawca'])."','".$_POST['obecnie']."')";
+     if ($query = $polaczenie->query($sql)) {
+       unset($_SESSION['blad']);
+       header("Location: index.php");
+     }
+     else {
+       echo '<h2>Coś zostało podane źle i utwór nie został dodany</h2>';
+     }
    }
+
  }
  ?>
  <script src="pickadate.js/jquery.1.7.0.js"></script>

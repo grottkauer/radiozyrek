@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -80,6 +82,9 @@ $(document).ready(function(){
                     </div></a>
                     <a href="add-topka.php"><div class="cms-under-block">
                       Dodawanie samego TOP30
+                    </div></a>
+                    <a href="add-wszechczas.php"><div class="cms-under-block">
+                      Dodawanie TOPU Wszechczasów
                     </div></a>
                   </div>
                   </a>

@@ -1,5 +1,5 @@
 
-<?php include('naglowek.php'); ?>
+<?php include('naglowek.php');?>
 
 <!-- BANNER-->
 		<div class="banner">
@@ -139,6 +139,49 @@
 							{
 								// Wczytanie nazwy utworu z bazy
 							  $sql12 = "SELECT * from utwory where id=$rekord9[4]"; // 2
+							  $query12 = @$polaczenie->query($sql12);
+							  $utwory12 = mysqli_fetch_array($query12);
+
+							  $nazwa_utworu = $utwory12[2];
+							  $wykonawca = $utwory12[3];
+
+								echo '<div class="top-nowosci">';
+									echo '<div class="top-lp">'.$lp.'</div>';
+									echo '<a href="wykonawcy.php?id='.$utwory12[0].'"><div class="top-autor">'.$wykonawca.'</div></a>';
+									echo '<a href="utwory.php?id='.$utwory12[0].'"><div class="top-utwor">'.$nazwa_utworu.'</div></a>';
+								echo '</div>';
+
+								echo '<div class="clear">
+
+								</div>';
+								$lp++;
+							}
+							 ?>
+						</div>
+
+						<div class="losowe-notowanie">
+							<?php
+							$sql8 = "SELECT * from notowania_top order by numer_not desc limit 1"; // 2
+							$query8 = $polaczenie->query($sql8);
+							$rekordzista1 = mysqli_fetch_array($query8);
+							$ostatnie_not = $rekordzista1[2];
+							//echo $ostatnie_not;
+								$losowy_nr = rand(1,$ostatnie_not);
+								$sql20 = "SELECT * from notowania_top where numer_not=$losowy_nr order by pozycja asc"; // 2
+								$query20 = $polaczenie->query($sql20);
+								$rekordzista2 = mysqli_fetch_array($query20);
+								$data = $rekordzista2[1];
+							 ?>
+							<h2>TOP 10 TOPU nr <?php echo $losowy_nr; ?> </h2>
+							<h3>Data: <?php echo $data; ?> </h3>
+							<?php
+							$sql9 = "SELECT * from notowania_top where numer_not=$losowy_nr order by pozycja asc limit 10"; // 2
+							$query9 = $polaczenie->query($sql9);
+							$lp = 1;
+							while($rekord9 = mysqli_fetch_array($query9))
+							{
+								// Wczytanie nazwy utworu z bazy
+							  $sql12 = "SELECT * from utwory where id=$rekord9[3]"; // 2
 							  $query12 = @$polaczenie->query($sql12);
 							  $utwory12 = mysqli_fetch_array($query12);
 

@@ -7,12 +7,23 @@ $query = $polaczenie->query($sql);
 $rekord = mysqli_fetch_array($query);
 $nazwa_utworu = $rekord[2];
 $wykonawca = $rekord[3];
-$sql2 = "SELECT * from notowania where id_utworu=$wartosc order by data asc"; // 2
-$query2 = $polaczenie->query($sql2);
-$rekord2 = mysqli_fetch_array($query2);
-$data = $rekord2[1];
-$nr_first = $rekord2[2];
-$liczTyg = mysqli_num_rows($query2);
+$obecnie = $rekord[4];
+if ($obecnie == 1 || $obecnie == 0) {
+  $sql2 = "SELECT * from notowania where id_utworu=$wartosc order by data asc"; // 2
+  $query2 = $polaczenie->query($sql2);
+  $rekord2 = mysqli_fetch_array($query2);
+  $data = $rekord2[1];
+  $nr_first = $rekord2[2];
+  $liczTyg = mysqli_num_rows($query2);
+}
+elseif ($obecnie == 2) {
+  $sql2 = "SELECT * from notowania_top where id_utworu=$wartosc order by data asc"; // 2
+  $query2 = $polaczenie->query($sql2);
+  $rekord2 = mysqli_fetch_array($query2);
+  $data = $rekord2[1];
+  $nr_first = $rekord2[2];
+  $liczTyg = mysqli_num_rows($query2);
+}
 //echo $data;
 
 
@@ -35,14 +46,24 @@ $liczTyg = mysqli_num_rows($query2);
     } ?> </caption>
     <tr class="col-calendar">
       <th colspan="4">
-        DATA WEJŚCIA NA LISTĘ <?php echo $data; ?> - LICZBA TYGODNI <?php echo $liczTyg; ?> - MAX POS
+        DATA WEJŚCIA NA LISTĘ <?php echo $data; ?> - LICZBA NOTOWAŃ <?php echo $liczTyg; ?> - MAX POS
         <?php
         // Obliczanie maksymalnej pozycji każdego utworu
-        $sql5 = "SELECT MIN(miejsce) AS max_poz FROM notowania WHERE id_utworu=$wartosc";
-        $query5 = @$polaczenie->query($sql5);
-        $wynik = mysqli_fetch_array($query5);
-        $max_poz = $wynik['max_poz'];
-        echo $max_poz;
+        if ($obecnie == 1 || $obecnie == 0) {
+          $sql5 = "SELECT MIN(miejsce) AS max_poz FROM notowania WHERE id_utworu=$wartosc";
+          $query5 = @$polaczenie->query($sql5);
+          $wynik = mysqli_fetch_array($query5);
+          $max_poz = $wynik['max_poz'];
+          echo $max_poz;
+        }
+        elseif ($obecnie == 2) {
+          $sql5 = "SELECT MIN(pozycja) AS max_poz FROM notowania_top WHERE id_utworu=$wartosc";
+          $query5 = @$polaczenie->query($sql5);
+          $wynik = mysqli_fetch_array($query5);
+          $max_poz = $wynik['max_poz'];
+          echo $max_poz;
+        }
+
          ?>
       </th>
     </tr>
@@ -59,34 +80,68 @@ $liczTyg = mysqli_num_rows($query2);
     </tr>
 <?php
 $tresc="";
-$sql3 = "SELECT * from notowania where id_utworu=$wartosc order by data"; // 2
-$query3 = $polaczenie->query($sql3);
-//$ostatni=0;
-while ($rekord3 = mysqli_fetch_array($query3)) {
-  $nr_not = $rekord3[2];
-  $miejsce = $rekord3[5];
-  if ($liczTyg==1 || $nr_not==$nr_first) {
-    $zmiana="N";
-  }
-  else {
-    $sql5 = "SELECT * from notowania WHERE numer_not = $nr_not-1 AND id_utworu = $rekord3[4]";
-    $query5 = $polaczenie->query($sql5);
-    $utworek = mysqli_fetch_array($query5);
-    $ostatni = $utworek[5];
-    if ($ostatni==0) {
-      $zmiana = "RE";
+if ($obecnie == 1 || $obecnie == 0) {
+  $sql3 = "SELECT * from notowania where id_utworu=$wartosc order by data"; // 2
+  $query3 = $polaczenie->query($sql3);
+  //$ostatni=0;
+  while ($rekord3 = mysqli_fetch_array($query3)) {
+    $nr_not = $rekord3[2];
+    $miejsce = $rekord3[5];
+    if ($liczTyg==1 || $nr_not==$nr_first) {
+      $zmiana="N";
     }
-    else if (($zmiana=$ostatni-$miejsce) > 0) {
-      $zmiana = "+$zmiana";
+    else {
+      $sql5 = "SELECT * from notowania WHERE numer_not = $nr_not-1 AND id_utworu = $rekord3[4]";
+      $query5 = $polaczenie->query($sql5);
+      $utworek = mysqli_fetch_array($query5);
+      $ostatni = $utworek[5];
+      if ($ostatni==0) {
+        $zmiana = "RE";
+      }
+      else if (($zmiana=$ostatni-$miejsce) > 0) {
+        $zmiana = "+$zmiana";
+      }
     }
-  }
 
-  $tresc.='<tr class="col-calendar">
-    <td class="lp"><a href="notowanie.php?id='.$nr_not.'">'.$nr_not.'</a></td>
-    <td class="date">'.$miejsce.'</td>
-    <td class="lp">'.$zmiana.'</td>
-  </tr>';
+    $tresc.='<tr class="col-calendar">
+      <td class="lp"><a href="notowanie.php?id='.$nr_not.'">'.$nr_not.'</a></td>
+      <td class="date">'.$miejsce.'</td>
+      <td class="lp">'.$zmiana.'</td>
+    </tr>';
+  }
 }
+elseif ($obecnie == 2) {
+  $sql3 = "SELECT * from notowania_top where id_utworu=$wartosc order by data"; // 2
+  $query3 = $polaczenie->query($sql3);
+  //$ostatni=0;
+  while ($rekord3 = mysqli_fetch_array($query3)) {
+    $nr_not = $rekord3[2];
+    $miejsce = $rekord3[4];
+    if ($liczTyg==1 || $nr_not==$nr_first) {
+      $zmiana="N";
+    }
+    else {
+      $sql5 = "SELECT * from notowania_top WHERE numer_not = $nr_not-1 AND id_utworu = $rekord3[3]";
+      $query5 = $polaczenie->query($sql5);
+      $utworek = mysqli_fetch_array($query5);
+      $ostatni = $utworek[4];
+      if ($ostatni==0) {
+        $zmiana = "RE";
+      }
+      else if (($zmiana=$ostatni-$miejsce) > 0) {
+        $zmiana = "+$zmiana";
+      }
+    }
+    $rok_topu = $nr_not + 2014;
+
+    $tresc.='<tr class="col-calendar">
+      <td class="lp"><a href="top.php?id='.$rok_topu.'">'.$nr_not.'</a></td>
+      <td class="date">'.$miejsce.'</td>
+      <td class="lp">'.$zmiana.'</td>
+    </tr>';
+  }
+}
+
 echo $tresc;
 
  ?>
